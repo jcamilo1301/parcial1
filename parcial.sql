@@ -114,9 +114,13 @@ group by col.barrio
 --7.2: Traiga los registros junto con el nombre de su comuna, para cada registro deberá calcularse el total de los estudiantes según los contadores. También deberá traer el total de estudiantes agrupados por comuna.
 --	 Columnas: ID, NOMBRE_SEDE, COMUNA_ID, NOMBRE_COMUNA, TOTAL_GENERAL, TOTAL_POR COMUNA
 
-select col.barrio, count(*) as numero_colegios from colegios col
-inner join comunas com on col.comuna_id= com.id
-group by col.barrio
+select col.ID, col.nombre_sede, col.comuna_id, com.nombre as NOMBRE_COMUNA, 
+col.contador_prejardin_jardin + col.contador_transicion + col.contador_primaria + col.contador_secundaria + col.contador_media +
+col.contador_adultos as TOTAL_GENERAL,
+sum(col.contador_prejardin_jardin + col.contador_transicion + col.contador_primaria + col.contador_secundaria + col.contador_media +
+col.contador_adultos) OVER (PARTITION BY com.nombre) as "TOTAL_POR COMUNA"
+from comunas com
+inner join colegios col on com.id = col.comuna_id
 ;
 
 --7.3: Traiga los colegios que dicten clases a estudiantes de prejardin-jardin y que en la prestación de su servicio sean no oficiales para las comunas ARANJUEZ, CASTILLA y DOCE DE OCTUBRE. Deberá incluir el contador de estudiantes de secundaria y deberá calcular el promedio de estudiantes de secundaria agrupados por comuna redondeado a 2 decimales.
