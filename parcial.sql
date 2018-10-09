@@ -123,6 +123,8 @@ from comunas com
 inner join colegios col on com.id = col.comuna_id
 ;
 
+
+
 --7.3: Traiga los colegios que dicten clases a estudiantes de prejardin-jardin y que en la prestación de su servicio sean no oficiales para las comunas ARANJUEZ, CASTILLA y DOCE DE OCTUBRE. Deberá incluir el contador de estudiantes de secundaria y deberá calcular el promedio de estudiantes de secundaria agrupados por comuna redondeado a 2 decimales.
 --	 Columnas: ID, NOMBRE_SEDE, COMUNA_ID, NOMBRE_COMUNA, CONTADOR_SECUNDARIA, PROMEDIO_SECUNDARIA_COMUNA
 
